@@ -2,7 +2,7 @@ import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 import { Banner } from '../components/Presentation'
 import { Separator } from '../components/Separator'
-import { Services } from '../components/Services'
+import { Services } from '../components/Home/Services'
 
 export function Home (): JSX.Element {
   return (

@@ -1,4 +1,4 @@
-import { useAllServices } from '../hooks/useServices'
+import { useAllServices } from '../../hooks/useServices'
 
 export function Services (): JSX.Element {
   const services = useAllServices()

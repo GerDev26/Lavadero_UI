@@ -44,9 +44,9 @@ export function UserTable (): JSX.Element {
     setUsers(allUsers)
   }, [allUsers])
 
-  const handleDelete = (selectedUser: User): void => {
+  const handleDelete = async (selectedUser: User): Promise<void> => {
     console.log(selectedUser)
-    deleteUser(selectedUser)
+    await deleteUser(selectedUser)
   }
 
   const handleUpdate = (selectedUser: User): void => {
@@ -70,7 +70,7 @@ export function UserTable (): JSX.Element {
             <TableRow>{user.surname}</TableRow>
             <TableRow>{user.phone_number}</TableRow>
             <TableRow>{user.email}</TableRow>
-            <TableRow onClick={() => handleDelete(user)}><TrashIcon className='m-auto w-6' /></TableRow>
+            <TableRow onClick={async () => await handleDelete(user)}><TrashIcon className='m-auto w-6' /></TableRow>
             <TableRow onClick={() => handleUpdate(user)}><PencilIcon className='m-auto w-6' /></TableRow>
           </tr>
         ))

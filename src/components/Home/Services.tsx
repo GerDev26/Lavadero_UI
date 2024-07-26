@@ -4,7 +4,7 @@ export function Services (): JSX.Element {
   const services = useAllServices()
 
   return (
-    <div className='flex w-full h-[70vh]'>
+    <div className='flex w-full h-[70vh] max-h-[500px]'>
       {services.map(service => (
         <ServiceItem key={service.id} text={service.service_name} description={service.description} imgUrl={service.image} />
       ))}

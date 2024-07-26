@@ -18,6 +18,13 @@ export function InputPassword ({ text }: { text: string }): JSX.Element {
     <Input text={text} message='Contraseña no valida' type='password' />
   )
 }
+export function InputHidden (): JSX.Element {
+  return (
+    <div className='opacity-0'>
+      <Input text='asd' message='Cpmtraseña no valida' type='password' />
+    </div>
+  )
+}
 
 export function Input ({ text, type, message }: { text: string, type: string, message: string }): JSX.Element {
   return (

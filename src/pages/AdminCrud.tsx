@@ -8,8 +8,6 @@ import { Modal } from '../components/CRUD/Modal'
 import { ModalContext, ModalProvider } from '../context/ModalContext'
 
 export function AdminCrud (): JSX.Element {
-
-
   return (
     <ModalProvider>
 

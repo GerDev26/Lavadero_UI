@@ -1,6 +1,8 @@
 import { Bars3Icon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { closeSession } from '../services/authService'
+import { getAccessToken, removeAccessToken } from '../helpers/tokenHelpers'
 
 export function Navbar (): JSX.Element {
   const [menuState, setMenuState] = useState(false)
@@ -16,7 +18,7 @@ export function Navbar (): JSX.Element {
       <Menu menuState={menuState}>
         <Item text='Mis autos' to='/CRUD' />
         <Item text='Mis turnos' to='/TURNOS' />
-        <Item text='Cerrar sesion' to='Catalogo' />
+        <SessionItem />
       </Menu>
       <Bars3Icon onClick={toggleMenu} className='relative z-50 w-8 h-8 mr-2 text-white md:hidden' />
     </nav>
@@ -38,13 +40,44 @@ export function Menu ({ children, menuState }: { children: React.ReactNode, menu
   )
 }
 
-function Item ({ text, to }: { text: string, to: string }): JSX.Element {
+function Item ({ text, to, onClick }: { text: string, to: string, onClick?: () => void }): JSX.Element {
   return (
-    <Link to={to} className='group relative px-4 py-3 cursor-pointer uppercase'>
+    <Link onClick={onClick} to={to} className='group relative px-4 py-3 cursor-pointer uppercase'>
       <h3 className='transition-all relative z-10 md:group-hover:text-black'>{text}</h3>
       <div className='transition-all absolute w-full bg-white h-1 bottom-0 left-0 z-0 group-hover:h-full hidden
       md:block'
       />
     </Link>
+  )
+}
+function SessionItem (): JSX.Element {
+  try {
+    getAccessToken()
+    return <CloseSessionItem />
+  } catch (error) {
+    return <Item text='Iniciar Sesión' to='/login' />
+  }
+}
+
+function CloseSessionItem (): JSX.Element {
+  const token = getAccessToken()
+
+  const logout = async (): Promise<void> => {
+    try {
+      await closeSession({ token })
+      removeAccessToken()
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleClick = (): void => {
+    logout().catch((error) => {
+      console.log(error)
+    })
+  }
+
+  return (
+    <Item onClick={handleClick} to='/' text='Cerrar sesion' />
   )
 }

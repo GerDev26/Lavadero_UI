@@ -19,7 +19,7 @@ export async function DeleteUser (id: string): Promise<void> {
   })
 }
 
-export async function CreateUser (user: User): Promise<any> {
+export async function CreateUser (user: User): Promise<User> {
   return await new Promise((resolve, reject) => {
     fetch(USERS_ENDPOINT, {
       method: 'POST',

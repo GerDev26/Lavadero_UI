@@ -1,7 +1,7 @@
 import { createContext, useReducer, ReactNode } from 'react'
 import { User, UserStates } from '../types/UserTypes'
 import { userReducer } from '../reducers/UserReducer'
-import { CreateUser, DeleteUser } from '../services/userServices'
+import { CreateUser, DeleteUser } from '../services/userService'
 
 interface UsersContextType {
   users: User[]
